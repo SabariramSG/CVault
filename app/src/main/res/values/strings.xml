@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CVault</string>
+    <string name="hello_blank_fragment">Hello home fragment</string>
+    <string name="card_preview_fragment">Hello card preview</string>
+</resources>
