@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.compose.material3.Card
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cvault.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -28,11 +30,30 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setUpUI()
+        setUpUI()
     }
 
     private fun setUpUI() {
-        TODO("Not yet implemented")
+        updateCardList(
+            listOf(
+                listOf("Card 1"),
+                listOf("Card 2")
+            )
+        )
+    }
+    private fun updateCardList(list: List<List<String>>?) {
+        binding.apply {
+            listRv.apply {
+                this.adapter = CardListAdapter(list,
+                    onItemClicked = {
+                        val bundle = Bundle()
+                        bundle.putString(Constants.SELECTED_CARD,it)
+                        arguments = bundle
+                        findNavController().navigate(R.id.action_homeFragment_to_cardPreviewFragment,arguments)
+                    })
+                this.layoutManager = LinearLayoutManager(activity)
+            }
+        }
     }
 
     override fun onDestroyView() {
