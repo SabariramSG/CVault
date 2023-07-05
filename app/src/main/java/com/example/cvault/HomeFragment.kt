@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpUI() {
+
         TODO("Not yet implemented")
     }
 
