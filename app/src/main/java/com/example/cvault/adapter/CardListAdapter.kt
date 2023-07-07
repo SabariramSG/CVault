@@ -1,24 +1,26 @@
-package com.example.cvault
+package com.example.cvault.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.cvault.bo.CardDetails
 import com.example.cvault.databinding.ItemCardDetailsBinding
 
 class CardListAdapter(
-    private val websites: List<List<String>>?,
-    private val onItemClicked: ((item: String) -> Unit)?
+    private val websites: List<CardDetails>?,
+    private val onItemClicked: ((item: String?) -> Unit)?
 ) :
     RecyclerView.Adapter<CardListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CardListAdapter.ViewHolder {
+    ): ViewHolder {
         val binding = ItemCardDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CardListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         websites?.get(position)?.let { holder.bind(it) }
     }
 
@@ -28,9 +30,10 @@ class CardListAdapter(
 
     inner class ViewHolder(private val binding: ItemCardDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: List<String>) {
-            binding.cardName.text = item[0]
-            binding.itemCard.setOnClickListener { onItemClicked?.invoke(item[0]) }
+        fun bind(card : CardDetails) {
+            binding.cardName.text = card.name
+            Glide.with(binding.cardImage).load(card.imageURL).into(binding.cardImage)
+            binding.itemCard.setOnClickListener { onItemClicked?.invoke(card.imageURL) }
         }
     }
 }

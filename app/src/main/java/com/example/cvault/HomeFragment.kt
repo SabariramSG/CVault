@@ -5,14 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cvault.adapter.CardListAdapter
+import com.example.cvault.bo.CardDetails
 import com.example.cvault.databinding.FragmentHomeBinding
+import com.example.cvault.viewmodel.CardDetailsViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: CardDetailsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,20 +34,28 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpUI()
+    override fun onResume() {
+        super.onResume()
+        setUpData()
     }
 
-    private fun setUpUI() {
-        updateCardList(
+    private fun setUpData() {
+        /*updateCardList(
             listOf(
                 listOf("Card 1"),
                 listOf("Card 2")
             )
-        )
+        )*/
+        ProgressDialogUtil.showLoadingDialog(activity,"Fetching card details")
+        viewModel.fetchCards().observe(viewLifecycleOwner) {
+            ProgressDialogUtil.dismissLoadingDialog(activity)
+            if(!it.isNullOrEmpty())
+                updateCardList(it)
+            else
+                Toast.makeText(activity,"No cards available",Toast.LENGTH_SHORT).show()
+        }
     }
-    private fun updateCardList(list: List<List<String>>?) {
+    private fun updateCardList(list: List<CardDetails>?) {
         binding.apply {
             listRv.apply {
                 this.adapter = CardListAdapter(list,

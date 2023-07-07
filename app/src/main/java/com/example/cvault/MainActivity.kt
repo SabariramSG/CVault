@@ -1,14 +1,13 @@
 package com.example.cvault
 
-import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cvault.activity.CreateCardActivity
 import com.example.cvault.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationBarItemView
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchCreateActivity() {
-        startActivity(Intent(this@MainActivity,CreateCardActivity::class.java))
+        startActivity(Intent(this@MainActivity, CreateCardActivity::class.java))
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {

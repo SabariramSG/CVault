@@ -14,14 +14,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="64dp"
+            android:layout_marginTop="32dp"
             android:text="Capture Image"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/capturedImage"
-            app:layout_constraintVertical_bias="0.506" />
+            app:layout_constraintTop_toBottomOf="@+id/capturedImage" />
+
+        <Button
+            android:id="@+id/createCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="307dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="28dp"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/cardNameEt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/roundedges"
+            android:hint="Enter card name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/captureImage"
+            tools:layout_editor_absoluteX="16dp" />
 
         <ImageView
             android:id="@+id/capturedImage"
@@ -30,7 +59,8 @@
             android:layout_below="@id/captureImage"
             android:layout_marginTop="140dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="center"
+            android:background="#EBEBEB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

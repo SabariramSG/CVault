@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/cardPreviewFragment"
-        android:name="com.example.cvault.CardPreviewFragment"
+        android:name="com.example.cvault.fragment.CardPreviewFragment"
         tools:layout="@layout/fragment_card_preview" >
         <action
             android:id="@+id/action_cardPreviewFragment_to_homeFragment"
